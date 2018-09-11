@@ -1,0 +1,22 @@
+language: bash
+sudo: required
+dist: trusty
+services:
+  - docker
+script:
+  - ./start-ci
+  - ../Outloud/continuous-integration/git-pull.sh
+  - ../Outloud/continuous-integration/docker-build.sh $ENVIRONMENT
+#   - /docker-test.sh $IMAGE_NAME_API $TRAVIS_BUILD_ID $ENVIRONMENT
+#   - ./scripts/docker-clean.sh $IMAGE_NAME_API
+# after_success:
+#   - ./scripts/docker-publish.sh $IMAGE_NAME_API $TRAVIS_BUILD_ID $REGISTRY_URL $REGISTRY_USERNAME $REGISTRY_PASSWORD
+#   - ./scripts/docker-publish.sh $IMAGE_NAME_CLIENT $TRAVIS_BUILD_ID $REGISTRY_URL $REGISTRY_USERNAME $REGISTRY_PASSWORD
+#   - ./scripts/docker-publish.sh $IMAGE_NAME_PROXY $TRAVIS_BUILD_ID $REGISTRY_URL $REGISTRY_USERNAME $REGISTRY_PASSWORD
+# notifications:
+#   slack:
+#     rooms:
+#       - distributedpandadeals:taoWWlPa2dyCun7YuE750xRI#builds
+  email:
+    on_success: never
+    on_failure: never
