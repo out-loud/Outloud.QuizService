@@ -7,6 +7,8 @@ script:
   - ./start-ci.sh
   - ../Outloud/continuous-integration/git-pull.sh $PROJECT_NAME
   - ../Outloud/continuous-integration/docker-build.sh $ENVIRONMENT
+  - ../Outloud/continuous-integration/docker-test.sh $IMAGE_NAME $ENVIRONMENT
+  - ../Outloud/continuous-integration/docker-clean.sh $IMAGE_NAME $ENVIRONMENT
 #   - /docker-test.sh $IMAGE_NAME_API $TRAVIS_BUILD_ID $ENVIRONMENT
 #   - ./scripts/docker-clean.sh $IMAGE_NAME_API
 # after_success:
