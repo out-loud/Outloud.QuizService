@@ -9,7 +9,7 @@ WORKDIR /src
 RUN dotnet build Outloud.QuizService.csproj -c Release -o /app
 # publish to /app dir
 FROM build AS publish
-RUN dotnet publish Outloud.QuizService.csproj -c Release -o /app
+RUN dotnet publish Outloud.QuizService.csproj -c Release -o /app --source "https://api.nuget.org/v3/index.json" --source "https://www.myget.org/F/outloud/api/v3/index.json"
 # copy tests
 FROM build AS test
 WORKDIR /tests
