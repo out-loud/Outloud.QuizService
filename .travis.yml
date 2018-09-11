@@ -4,8 +4,8 @@ dist: trusty
 services:
   - docker
 script:
-  - ./start-ci.sh $PROJECT_NAME
-  - ../Outloud/continuous-integration/git-pull.sh
+  - ./start-ci.sh
+  - ../Outloud/continuous-integration/git-pull.sh $PROJECT_NAME
   - ../Outloud/continuous-integration/docker-build.sh $ENVIRONMENT
 #   - /docker-test.sh $IMAGE_NAME_API $TRAVIS_BUILD_ID $ENVIRONMENT
 #   - ./scripts/docker-clean.sh $IMAGE_NAME_API
