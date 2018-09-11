@@ -13,7 +13,7 @@ script:
 #   - ./scripts/docker-publish.sh $IMAGE_NAME_API $TRAVIS_BUILD_ID $REGISTRY_URL $REGISTRY_USERNAME $REGISTRY_PASSWORD
 #   - ./scripts/docker-publish.sh $IMAGE_NAME_CLIENT $TRAVIS_BUILD_ID $REGISTRY_URL $REGISTRY_USERNAME $REGISTRY_PASSWORD
 #   - ./scripts/docker-publish.sh $IMAGE_NAME_PROXY $TRAVIS_BUILD_ID $REGISTRY_URL $REGISTRY_USERNAME $REGISTRY_PASSWORD
-# notifications:
+notifications:
 #   slack:
 #     rooms:
 #       - distributedpandadeals:taoWWlPa2dyCun7YuE750xRI#builds
