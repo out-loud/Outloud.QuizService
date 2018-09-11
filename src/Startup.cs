@@ -40,7 +40,7 @@ namespace Outloud.QuizService
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
