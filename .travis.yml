@@ -8,14 +8,8 @@ script:
   - ../Outloud/continuous-integration/git-pull.sh $PROJECT_NAME
   - ../Outloud/continuous-integration/docker-build.sh $ENVIRONMENT
   - ../Outloud/continuous-integration/docker-test.sh $IMAGE_NAME $ENVIRONMENT
-  - ../Outloud/continuous-integration/docker-clean.sh $IMAGE_NAME $ENVIRONMENT
+after_success:
   - ../Outloud/continuous-integration/docker-publish.sh $IMAGE_NAME $REGISTRY $TRAVIS_BRANCH
-#   - /docker-test.sh $IMAGE_NAME_API $TRAVIS_BUILD_ID $ENVIRONMENT
-#   - ./scripts/docker-clean.sh $IMAGE_NAME_API
-# after_success:
-#   - ./scripts/docker-publish.sh $IMAGE_NAME_API $TRAVIS_BUILD_ID $REGISTRY_URL $REGISTRY_USERNAME $REGISTRY_PASSWORD
-#   - ./scripts/docker-publish.sh $IMAGE_NAME_CLIENT $TRAVIS_BUILD_ID $REGISTRY_URL $REGISTRY_USERNAME $REGISTRY_PASSWORD
-#   - ./scripts/docker-publish.sh $IMAGE_NAME_PROXY $TRAVIS_BUILD_ID $REGISTRY_URL $REGISTRY_USERNAME $REGISTRY_PASSWORD
 notifications:
   slack: outloud-talk:TGwStb79G3lZNaeh7f5aiGIP
   email:
