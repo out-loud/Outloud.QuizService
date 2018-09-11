@@ -9,6 +9,7 @@ script:
   - ../Outloud/continuous-integration/docker-build.sh $ENVIRONMENT
   - ../Outloud/continuous-integration/docker-test.sh $IMAGE_NAME $ENVIRONMENT
   - ../Outloud/continuous-integration/docker-clean.sh $IMAGE_NAME $ENVIRONMENT
+  - ../Outloud/continuous-integration/docker-publish.sh $IMAGE_NAME $REGISTRY $TRAVIS_BRANCH
 #   - /docker-test.sh $IMAGE_NAME_API $TRAVIS_BUILD_ID $ENVIRONMENT
 #   - ./scripts/docker-clean.sh $IMAGE_NAME_API
 # after_success:
