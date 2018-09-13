@@ -14,7 +14,7 @@ FROM build AS test
 WORKDIR /tests
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.3.0/wait /wait
 RUN chmod +x /wait
-ENTRYPOINT /wait && dotnet test --logger:trx
+ENTRYPOINT /wait && dotnet test -c Release --logger:trx
 # publish
 FROM microsoft/dotnet:2.1-aspnetcore-runtime-alpine AS base
 WORKDIR /app
