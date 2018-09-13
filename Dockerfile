@@ -3,10 +3,9 @@ LABEL stage intermediate
 WORKDIR /
 COPY Outloud.QuizService/src src
 COPY Outloud.QuizService/tests tests
-RUN dotnet restore src/Outloud.QuizService.csproj
 WORKDIR /src
 # build
-RUN dotnet build Outloud.QuizService.csproj -c Release -o /app
+RUN dotnet build Outloud.QuizService.csproj -c Release -o /app --source "https://api.nuget.org/v3/index.json" --source "https://www.myget.org/F/outloud/api/v3/index.json"
 # publish to /app dir
 FROM build AS publish
 RUN dotnet publish Outloud.QuizService.csproj -c Release -o /app --source "https://api.nuget.org/v3/index.json" --source "https://www.myget.org/F/outloud/api/v3/index.json"
