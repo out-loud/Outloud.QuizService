@@ -13,4 +13,11 @@
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.2"/>
   </ItemGroup>
 
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <ProjectReference Include="..\..\Outloud.Common\src\Outloud.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
+    <PackageReference Include="Outloud.Common" Version="1.0.*" />
+  </ItemGroup>
+
 </Project>
