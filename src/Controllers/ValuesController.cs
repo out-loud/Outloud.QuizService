@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Outloud.QuizService.Controllers
@@ -14,7 +12,7 @@ namespace Outloud.QuizService.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            throw new Exception("Hello world");
         }
 
         // GET api/values/5
