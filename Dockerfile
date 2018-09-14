@@ -14,7 +14,7 @@ FROM build AS test
 WORKDIR /tests
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.3.0/wait /wait
 RUN chmod +x /wait
-RUN dotnet restore  --source "https://api.nuget.org/v3/index.json" --source "https://www.myget.org/F/outloud/api/v3/index.json"
+RUN dotnet restore  -c Release --source "https://api.nuget.org/v3/index.json" --source "https://www.myget.org/F/outloud/api/v3/index.json"
 ENTRYPOINT /wait && dotnet test -c Release --no-restore --logger:trx
 # publish
 FROM microsoft/dotnet:2.1-aspnetcore-runtime-alpine AS base
