@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Outloud.Common.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Outloud.QuizService.Controllers
 {
@@ -12,7 +15,12 @@ namespace Outloud.QuizService.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            throw new Exception("Hello world");
+            var values = new List<string> {
+                "value1",
+                "value2"
+            };
+
+            return values;
         }
 
         // GET api/values/5
@@ -24,8 +32,10 @@ namespace Outloud.QuizService.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Authorize(Policies.RequireAdmin)]
+        public ActionResult Post([FromBody] TestData value)
         {
+            return Accepted(value);
         }
 
         // PUT api/values/5

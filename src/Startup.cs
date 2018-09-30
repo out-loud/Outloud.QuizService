@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Outloud.Common.Swagger;
+using Outloud.Common.Authentication;
 
 namespace Outloud.QuizService
 {
@@ -21,6 +22,7 @@ namespace Outloud.QuizService
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwagger();
+            services.AddAuth0();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +38,7 @@ namespace Outloud.QuizService
             }
 
             app.UseSwagger();
+            app.UseAuth0();
             // app.UseHttpsRedirection();
             app.UseMvc();
         }
