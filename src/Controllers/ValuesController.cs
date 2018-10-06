@@ -32,7 +32,7 @@ namespace Outloud.QuizService.Controllers
 
         // POST api/values
         [HttpPost]
-        [Authorize(Policies.RequireAdmin)]
+        [Authorize]
         public ActionResult Post([FromBody] TestData value)
         {
             return Accepted(value);
