@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RootNamespace>Outloud.QuizService</RootNamespace>
+    <UserSecretsId>59cb44ae-d99b-48c4-9c8e-41b8b4bb2800</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
