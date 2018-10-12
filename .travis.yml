@@ -4,7 +4,7 @@ dist: trusty
 services:
   - docker
 script:
-  - ./start-ci.sh
+  - ./scripts/start-ci.sh
   - ../Outloud/continuous-integration/git-pull.sh $PROJECT_NAME
   - ../Outloud/continuous-integration/docker-build.sh $ENVIRONMENT $TRAVIS_BUILD_NUMBER $NUGET_API_KEY
   - ../Outloud/continuous-integration/docker-test.sh $IMAGE_NAME $ENVIRONMENT $TRAVIS_BUILD_NUMBER $NUGET_API_KEY
