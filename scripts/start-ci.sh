@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd ../..
+cd ..
 git clone https://github.com/out-loud/Outloud
