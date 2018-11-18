@@ -3,35 +3,28 @@ using Outloud.QuizService.DTO;
 using Outloud.QuizService.Mappers;
 using Outloud.QuizService.Persistance;
 using Outloud.QuizService.Persistance.Repositiories;
-using System;
 using System.Threading.Tasks;
 
 namespace Outloud.QuizService.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class QuizController : Controller
+    public class WordsController : Controller
     {
         private readonly IQuizRepository quizRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public QuizController(IQuizRepository quizRepository, IUnitOfWork unitOfWork)
+        public WordsController(IQuizRepository quizRepository, IUnitOfWork unitOfWork)
         {
             this.quizRepository = quizRepository;
             this.unitOfWork = unitOfWork;
         }
 
-        [HttpGet("all")]
-        public async Task<IActionResult> Get() => Ok(await quizRepository.GetQuizesAsync());
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id) => Ok(await quizRepository.GetQuizAsync(id));
-
         [HttpPost]
-        public async Task<IActionResult> Add(QuizDTO quiz)
+        public async Task<IActionResult> Add(WordDTO word)
         {
-            var entity = Mapper.Map(quiz);
-            await quizRepository.AddQuizAsync(entity);
+            var entity = Mapper.Map(word);
+            await quizRepository.AddWordAsync(entity);
             await unitOfWork.CompleteAsync();
             return Accepted();
         }

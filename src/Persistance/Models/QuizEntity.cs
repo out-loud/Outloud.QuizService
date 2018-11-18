@@ -7,13 +7,16 @@ namespace Outloud.QuizService.Persistance.Models
     [Table("Quizes")]
     public class QuizEntity
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+        public Guid CategoryId { get; set; }
         public string Name { get; set; }
-        public IEnumerable<WordEntity> Words { get; set; }
+        public ICollection<WordEntity> Words { get; set; }
 
-        public QuizEntity()
+        public QuizEntity(Guid categoryId, string name)
         {
-            Id = Guid.NewGuid();
+            CategoryId = categoryId;
+            Name = name;
         }
     }
 }

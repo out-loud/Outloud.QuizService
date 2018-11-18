@@ -24,6 +24,7 @@ namespace Outloud.QuizService.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    CategoryId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     CategoryEntityId = table.Column<Guid>(nullable: true)
                 },
@@ -43,6 +44,7 @@ namespace Outloud.QuizService.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    QuizId = table.Column<Guid>(nullable: false),
                     Value = table.Column<string>(nullable: true),
                     QuizEntityId = table.Column<Guid>(nullable: true)
                 },
