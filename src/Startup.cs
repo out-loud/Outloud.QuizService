@@ -7,6 +7,7 @@ using Outloud.Common.Swagger;
 using Outloud.Common.Authentication;
 using Outloud.QuizService.Persistance;
 using Microsoft.EntityFrameworkCore;
+using Outloud.QuizService.Persistance.Repositiories;
 
 namespace Outloud.QuizService
 {
@@ -21,9 +22,14 @@ namespace Outloud.QuizService
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IQuizRepository, QuizRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+
             services.AddDbContext<QuizDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                 opt => opt.UseRowNumberForPaging()), ServiceLifetime.Singleton);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwagger();
             services.AddAuth0();
