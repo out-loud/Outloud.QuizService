@@ -15,17 +15,20 @@ namespace Outloud.QuizService.Persistance.Repositiories
             this.context = context;
         }
 
-        public async Task<Category> GetCategoryAsync(Guid id) => await context.Categories.Include(x => x.Quizes).SingleOrDefaultAsync(x => x.Id == id);
+        public async Task<CategoryEntity> GetCategoryAsync(Guid id) => await context.Categories.Include(x => x.Quizes).SingleOrDefaultAsync(x => x.Id == id);
 
-        public async Task<Category> GetCategoryAsync(string name) => await context.Categories.Include(x => x.Quizes).SingleOrDefaultAsync(x => x.Name == name);
+        public async Task<CategoryEntity> GetCategoryAsync(string name) => await context.Categories.Include(x => x.Quizes).SingleOrDefaultAsync(x => x.Name == name);
 
-        public async Task<IEnumerable<Category>> GetCategoriesAsync() => await context.Categories.ToListAsync();
+        public async Task<IEnumerable<CategoryEntity>> GetCategoriesAsync() => await context.Categories.ToListAsync();
+
+        public async Task AddCategoryAsync(CategoryEntity entity) => await context.AddAsync(entity);
     }
 
     public interface ICategoryRepository
     {
-        Task<Category> GetCategoryAsync(Guid id);
-        Task<Category> GetCategoryAsync(string name);
-        Task<IEnumerable<Category>> GetCategoriesAsync();
+        Task<CategoryEntity> GetCategoryAsync(Guid id);
+        Task<CategoryEntity> GetCategoryAsync(string name);
+        Task<IEnumerable<CategoryEntity>> GetCategoriesAsync();
+        Task AddCategoryAsync(CategoryEntity entity);
     }
 }

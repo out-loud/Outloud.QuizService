@@ -8,6 +8,7 @@ using Outloud.Common.Authentication;
 using Outloud.QuizService.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Outloud.QuizService.Persistance.Repositiories;
+using Outloud.QuizService.Mappers;
 
 namespace Outloud.QuizService
 {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Outloud.QuizService.Dto;
+using Outloud.QuizService.Mappers;
 using Outloud.QuizService.Persistance;
 using Outloud.QuizService.Persistance.Repositiories;
 using System;
@@ -27,9 +28,11 @@ namespace Outloud.QuizService.Controllers
         public async Task<IActionResult> Get(Guid id) => Ok(await categoryRepository.GetCategoryAsync(id));
 
         [HttpPost]
-        public async Task<IActionResult> Add(CategoryDto category)
+        public async Task<IActionResult> Add(CategoryDTO category)
         {
-
+            var entity = Mapper.Map(category);
+            await categoryRepository.AddCategoryAsync(entity);
+            await unitOfWork.CompleteAsync();
             return Accepted();
         }
     }

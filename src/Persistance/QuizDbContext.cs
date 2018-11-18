@@ -5,9 +5,9 @@ namespace Outloud.QuizService.Persistance
 {
     public class QuizDbContext : DbContext
     {
-        public DbSet<Word> Words { get; set; }
-        public DbSet<Quiz> Quizes { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<WordEntity> Words { get; set; }
+        public DbSet<QuizEntity> Quizes { get; set; }
+        public DbSet<CategoryEntity> Categories { get; set; }
         
         public QuizDbContext(DbContextOptions<QuizDbContext> options) : base(options)
         {

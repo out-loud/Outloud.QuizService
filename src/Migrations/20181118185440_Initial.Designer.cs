@@ -10,8 +10,8 @@ using Outloud.QuizService.Persistance;
 namespace Outloud.QuizService.Migrations
 {
     [DbContext(typeof(QuizDbContext))]
-    [Migration("20181118172610_Initialize")]
-    partial class Initialize
+    [Migration("20181118185440_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace Outloud.QuizService.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Outloud.QuizService.Persistance.Models.Category", b =>
+            modelBuilder.Entity("Outloud.QuizService.Persistance.Models.CategoryEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -33,27 +33,50 @@ namespace Outloud.QuizService.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Outloud.QuizService.Persistance.Models.Quiz", b =>
+            modelBuilder.Entity("Outloud.QuizService.Persistance.Models.QuizEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("CategoryId");
+                    b.Property<Guid?>("CategoryEntityId");
 
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoryEntityId");
 
                     b.ToTable("Quizes");
                 });
 
-            modelBuilder.Entity("Outloud.QuizService.Persistance.Models.Quiz", b =>
+            modelBuilder.Entity("Outloud.QuizService.Persistance.Models.WordEntity", b =>
                 {
-                    b.HasOne("Outloud.QuizService.Persistance.Models.Category")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("QuizEntityId");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizEntityId");
+
+                    b.ToTable("Words");
+                });
+
+            modelBuilder.Entity("Outloud.QuizService.Persistance.Models.QuizEntity", b =>
+                {
+                    b.HasOne("Outloud.QuizService.Persistance.Models.CategoryEntity")
                         .WithMany("Quizes")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryEntityId");
+                });
+
+            modelBuilder.Entity("Outloud.QuizService.Persistance.Models.WordEntity", b =>
+                {
+                    b.HasOne("Outloud.QuizService.Persistance.Models.QuizEntity")
+                        .WithMany("Words")
+                        .HasForeignKey("QuizEntityId");
                 });
 #pragma warning restore 612, 618
         }

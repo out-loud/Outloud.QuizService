@@ -4,14 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Outloud.QuizService.Persistance.Models
 {
-    [Table("Categories")]
-    public class Category
+    [Table("Quizes")]
+    public class QuizEntity
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<Quiz> Quizes { get; set; }
+        public IEnumerable<WordEntity> Words { get; set; }
 
-        public Category()
+        public QuizEntity()
         {
             Id = Guid.NewGuid();
         }
