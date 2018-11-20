@@ -9,13 +9,13 @@ namespace Outloud.QuizService.Persistance.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public Guid CategoryId { get; set; }
+        public Guid ParentId { get; set; }
         public string Name { get; set; }
         public ICollection<WordEntity> Words { get; set; }
 
-        public QuizEntity(Guid categoryId, string name)
+        public QuizEntity(Guid parentId, string name)
         {
-            CategoryId = categoryId;
+            ParentId = parentId;
             Name = name;
         }
     }

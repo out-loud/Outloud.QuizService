@@ -4,12 +4,12 @@ namespace Outloud.QuizService.DTO
 {
     public class WordDTO
     {
-        public Guid QuizId{ get; set; }
-        public string Value { get; set; }
+        public Guid ParentId{ get; set; }
+        public string Name { get; set; }
 
-        public WordDTO(string value)
+        public WordDTO(string name)
         {
-            Value = value;
+            this.Name = name;
         }
     }
 }

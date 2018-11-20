@@ -10,7 +10,7 @@ using Outloud.QuizService.Persistance;
 namespace Outloud.QuizService.Migrations
 {
     [DbContext(typeof(QuizDbContext))]
-    [Migration("20181118200240_Initial")]
+    [Migration("20181120221856_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,9 +40,9 @@ namespace Outloud.QuizService.Migrations
 
                     b.Property<Guid?>("CategoryEntityId");
 
-                    b.Property<Guid>("CategoryId");
-
                     b.Property<string>("Name");
+
+                    b.Property<Guid>("ParentId");
 
                     b.HasKey("Id");
 
@@ -56,11 +56,11 @@ namespace Outloud.QuizService.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Name");
+
+                    b.Property<Guid>("ParentId");
+
                     b.Property<Guid?>("QuizEntityId");
-
-                    b.Property<Guid>("QuizId");
-
-                    b.Property<string>("Value");
 
                     b.HasKey("Id");
 

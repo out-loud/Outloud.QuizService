@@ -3,6 +3,7 @@ using Outloud.QuizService.DTO;
 using Outloud.QuizService.Mappers;
 using Outloud.QuizService.Persistance;
 using Outloud.QuizService.Persistance.Repositiories;
+using System;
 using System.Threading.Tasks;
 
 namespace Outloud.QuizService.Controllers
@@ -27,6 +28,20 @@ namespace Outloud.QuizService.Controllers
             await quizRepository.AddWordAsync(entity);
             await unitOfWork.CompleteAsync();
             return Accepted();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var items = await quizRepository.GetWordsAsync();
+            return Ok(items);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(Guid parentId)
+        {
+            var items = await quizRepository.GetWordsAsync(parentId);
+            return Ok(items);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Outloud.QuizService.Controllers
             this.unitOfWork = unitOfWork;
         }
         
-        [HttpGet("all")]
+        [HttpGet]
         public async Task<IActionResult> Get() => Ok(await categoryRepository.GetCategoriesAsync());
 
         [HttpGet("{id}")]

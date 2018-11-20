@@ -23,23 +23,40 @@ namespace Outloud.QuizService.Persistance.Repositiories
 
         public async Task AddQuizAsync(QuizEntity entity)
         {
-            var category = await context.Categories.FindAsync(entity.CategoryId);
+            var category = await context.Categories.FindAsync(entity.ParentId);
             category.Quizes.Add(entity);
         }
 
+        public async Task<ICollection<WordEntity>> GetWordsAsync() => await context.Words.ToListAsync();
+
         public async Task AddWordAsync(WordEntity entity)
         {
-            var quiz = await context.Quizes.FindAsync(entity.QuizId);
+            var quiz = await context.Quizes.FindAsync(entity.ParentId);
             quiz.Words.Add(entity);
         }
-    }
+
+        public async Task<ICollection<WordEntity>> GetWordsAsync(Guid quizId)
+        {
+            var quiz = await context.Quizes.Include(x => x.Words).SingleOrDefaultAsync(x => x.Id == quizId);
+            return quiz?.Words;
+        }
+
+        public async Task<ICollection<QuizEntity>> GetQuizesAsync(Guid categoryId)
+        {
+            var category = await context.Categories.Include(x => x.Quizes).ThenInclude(y => y.Words).SingleOrDefaultAsync(x => x.Id == categoryId);
+            return category?.Quizes;
+        }
+  }
 
     public interface IQuizRepository
     {
         Task<QuizEntity> GetQuizAsync(Guid id);
         Task<QuizEntity> GetQuizAsync(string name);
         Task<ICollection<QuizEntity>> GetQuizesAsync();
+        Task<ICollection<QuizEntity>> GetQuizesAsync(Guid categoryId);
         Task AddQuizAsync(QuizEntity entity);
         Task AddWordAsync(WordEntity entity);
+        Task<ICollection<WordEntity>> GetWordsAsync();
+        Task<ICollection<WordEntity>> GetWordsAsync(Guid quizId);
     }
 }

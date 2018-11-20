@@ -38,9 +38,9 @@ namespace Outloud.QuizService.Migrations
 
                     b.Property<Guid?>("CategoryEntityId");
 
-                    b.Property<Guid>("CategoryId");
-
                     b.Property<string>("Name");
+
+                    b.Property<Guid>("ParentId");
 
                     b.HasKey("Id");
 
@@ -54,11 +54,11 @@ namespace Outloud.QuizService.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Name");
+
+                    b.Property<Guid>("ParentId");
+
                     b.Property<Guid?>("QuizEntityId");
-
-                    b.Property<Guid>("QuizId");
-
-                    b.Property<string>("Value");
 
                     b.HasKey("Id");
 

@@ -21,11 +21,11 @@ namespace Outloud.QuizService.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        [HttpGet("all")]
+        [HttpGet]
         public async Task<IActionResult> Get() => Ok(await quizRepository.GetQuizesAsync());
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id) => Ok(await quizRepository.GetQuizAsync(id));
+        [HttpGet("{parentId}")]
+        public async Task<IActionResult> Get(Guid parentId) => Ok(await quizRepository.GetQuizesAsync(parentId));
 
         [HttpPost]
         public async Task<IActionResult> Add(QuizDTO quiz)
