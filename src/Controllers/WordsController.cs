@@ -37,7 +37,7 @@ namespace Outloud.QuizService.Controllers
             return Ok(items);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{parentId}")]
         public async Task<IActionResult> Get(Guid parentId)
         {
             var items = await quizRepository.GetWordsAsync(parentId);
