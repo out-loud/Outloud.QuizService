@@ -1,5 +1,5 @@
 # build
-FROM microsoft/dotnet:2.1-sdk-alpine AS build
+FROM microsoft/dotnet:2.2-sdk-alpine AS build
 LABEL stage intermediate
 WORKDIR /
 COPY Outloud.QuizService/src src
@@ -19,7 +19,7 @@ ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.3.0/wait
 RUN chmod +x /wait
 ENTRYPOINT /wait && dotnet test -c Release --no-restore --logger:trx
 # publish
-FROM microsoft/dotnet:2.1-aspnetcore-runtime-alpine AS base
+FROM microsoft/dotnet:2.2-aspnetcore-runtime-alpine AS base
 WORKDIR /app
 COPY --from=publish /app .
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.3.0/wait /wait
