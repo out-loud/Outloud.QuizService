@@ -9,7 +9,6 @@ namespace Outloud.QuizService.DTO
 
         public QuizDTO(Guid parentId, string name)
         {
-            ParentId = parentId;
             Name = name;
         }
     }

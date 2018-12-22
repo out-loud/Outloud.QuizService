@@ -10,14 +10,14 @@ using Outloud.QuizService.Persistance;
 namespace Outloud.QuizService.Migrations
 {
     [DbContext(typeof(QuizDbContext))]
-    [Migration("20181120221856_Initial")]
-    partial class Initial
+    [Migration("20181222174604_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 

@@ -13,6 +13,11 @@ namespace Outloud.QuizService.Persistance.Models
         public string Name { get; set; }
         public ICollection<WordEntity> Words { get; set; }
 
+        public QuizEntity()
+        {
+
+        }
+
         public QuizEntity(Guid parentId, string name)
         {
             ParentId = parentId;

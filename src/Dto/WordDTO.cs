@@ -9,7 +9,7 @@ namespace Outloud.QuizService.DTO
 
         public WordDTO(string name)
         {
-            this.Name = name;
+            Name = name;
         }
     }
 }
