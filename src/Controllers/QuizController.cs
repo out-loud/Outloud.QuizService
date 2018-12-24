@@ -31,7 +31,7 @@ namespace Outloud.QuizService.Controllers
         public async Task<IActionResult> Add(QuizDTO quiz)
         {
             var entity = Mapper.Map(quiz);
-            await quizRepository.AddQuizAsync(entity);
+            await quizRepository.AddQuizAsync(quiz.ParentId, entity);
             await unitOfWork.CompleteAsync();
             return Accepted();
         }

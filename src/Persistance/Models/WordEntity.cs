@@ -8,7 +8,6 @@ namespace Outloud.QuizService.Persistance.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public Guid ParentId { get; set; }
         public string Name { get; set; }
 
         public WordEntity()
@@ -16,9 +15,8 @@ namespace Outloud.QuizService.Persistance.Models
 
         }
 
-        public WordEntity(Guid parentId, string name)
+        public WordEntity(string name)
         {
-            ParentId = parentId;
             Name = name;
         }
     }

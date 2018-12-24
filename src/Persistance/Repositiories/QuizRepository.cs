@@ -21,17 +21,17 @@ namespace Outloud.QuizService.Persistance.Repositiories
 
         public async Task<ICollection<QuizEntity>> GetQuizesAsync() => await context.Quizes.Include(x => x.Words).ToListAsync();
 
-        public async Task AddQuizAsync(QuizEntity entity)
+        public async Task AddQuizAsync(Guid parentId, QuizEntity entity)
         {
-            var category = await context.Categories.FindAsync(entity.ParentId);
+            var category = await context.Categories.FindAsync(parentId);
             category.Quizes.Add(entity);
         }
 
         public async Task<ICollection<WordEntity>> GetWordsAsync() => await context.Words.ToListAsync();
 
-        public async Task AddWordAsync(WordEntity entity)
+        public async Task AddWordAsync(Guid parentId, WordEntity entity)
         {
-            var quiz = await context.Quizes.FindAsync(entity.ParentId);
+            var quiz = await context.Quizes.FindAsync(parentId);
             quiz.Words.Add(entity);
         }
 
@@ -54,8 +54,8 @@ namespace Outloud.QuizService.Persistance.Repositiories
         Task<QuizEntity> GetQuizAsync(string name);
         Task<ICollection<QuizEntity>> GetQuizesAsync();
         Task<ICollection<QuizEntity>> GetQuizesAsync(Guid categoryId);
-        Task AddQuizAsync(QuizEntity entity);
-        Task AddWordAsync(WordEntity entity);
+        Task AddQuizAsync(Guid parentId, QuizEntity entity);
+        Task AddWordAsync(Guid parentId, WordEntity entity);
         Task<ICollection<WordEntity>> GetWordsAsync();
         Task<ICollection<WordEntity>> GetWordsAsync(Guid quizId);
     }

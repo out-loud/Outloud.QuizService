@@ -7,7 +7,7 @@ namespace Outloud.QuizService.DTO
         public Guid ParentId { get; set; }
         public string Name { get; set; }
 
-        public QuizDTO(Guid parentId, string name)
+        public QuizDTO(string name)
         {
             Name = name;
         }

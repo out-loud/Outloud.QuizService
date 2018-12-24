@@ -25,7 +25,7 @@ namespace Outloud.QuizService.Controllers
         public async Task<IActionResult> Add(WordDTO word)
         {
             var entity = Mapper.Map(word);
-            await quizRepository.AddWordAsync(entity);
+            await quizRepository.AddWordAsync(word.ParentId, entity);
             await unitOfWork.CompleteAsync();
             return Accepted();
         }
