@@ -23,7 +23,7 @@ namespace Outloud.QuizService.Persistance.Repositiories
 
         public async Task AddQuizAsync(Guid parentId, QuizEntity entity)
         {
-            var category = await context.Categories.FindAsync(parentId);
+            var category = await context.Categories.Include(x => x.Quizes).SingleOrDefaultAsync(x => x.Id == parentId);
             category.Quizes.Add(entity);
         }
 
@@ -31,7 +31,7 @@ namespace Outloud.QuizService.Persistance.Repositiories
 
         public async Task AddWordAsync(Guid parentId, WordEntity entity)
         {
-            var quiz = await context.Quizes.FindAsync(parentId);
+            var quiz = await context.Quizes.Include(x => x.Words).SingleOrDefaultAsync(x => x.Id == parentId);
             quiz.Words.Add(entity);
         }
 

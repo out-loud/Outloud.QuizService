@@ -10,12 +10,12 @@ namespace Outloud.QuizService.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class CategoryController : Controller
+    public class CategoriesController : Controller
     {
         private readonly ICategoryRepository categoryRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public CategoryController(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
+        public CategoriesController(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
         {
             this.categoryRepository = categoryRepository;
             this.unitOfWork = unitOfWork;
