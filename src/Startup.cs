@@ -31,7 +31,7 @@ namespace Outloud.QuizService
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                 opt => opt.UseRowNumberForPaging()), ServiceLifetime.Singleton);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSwagger();
             services.AddAuth0();
         }
