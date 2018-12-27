@@ -12,35 +12,35 @@ namespace Outloud.QuizService.Controllers
     [ApiController]
     public class WordsController : Controller
     {
-        private readonly IQuizRepository quizRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IQuizRepository _quizRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public WordsController(IQuizRepository quizRepository, IUnitOfWork unitOfWork)
         {
-            this.quizRepository = quizRepository;
-            this.unitOfWork = unitOfWork;
+            this._quizRepository = quizRepository;
+            this._unitOfWork = unitOfWork;
         }
 
         [HttpPost]
         public async Task<IActionResult> Add(WordDTO word)
         {
             var entity = Mapper.Map(word);
-            await quizRepository.AddWordAsync(word.ParentId, entity);
-            await unitOfWork.CompleteAsync();
+            await _quizRepository.AddWordAsync(word.ParentId, entity);
+            await _unitOfWork.CompleteAsync();
             return Accepted();
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var items = await quizRepository.GetWordsAsync();
+            var items = await _quizRepository.GetWordsAsync();
             return Ok(items);
         }
 
         [HttpGet("{parentId}")]
         public async Task<IActionResult> Get(Guid parentId)
         {
-            var items = await quizRepository.GetWordsAsync(parentId);
+            var items = await _quizRepository.GetWordsAsync(parentId);
             return Ok(items);
         }
     }
