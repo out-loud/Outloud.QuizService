@@ -9,7 +9,7 @@ namespace Outloud.QuizService.Persistance
         public QuizDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<QuizDbContext>();
-            optionsBuilder.UseSqlServer("Server=localhost;Database=master;User=sa;Password=1qazxsW@;");
+            optionsBuilder.UseSqlServer("Server=localhost,1433;Database=master;User=sa;Password=1qazxsW@;");
 
             return new QuizDbContext(optionsBuilder.Options);
         }
