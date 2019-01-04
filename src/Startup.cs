@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Outloud.Common.Swagger;
+using Outloud.Common.Authentication;
+using Outloud.QuizService.Persistance;
+using Microsoft.EntityFrameworkCore;
+using Outloud.QuizService.Persistance.Repositiories;
+using Outloud.QuizService.Mappers;
 
 namespace Outloud.QuizService
 {
@@ -22,15 +21,29 @@ namespace Outloud.QuizService
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IQuizRepository, QuizRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+            services.AddDbContext<QuizDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                opt => opt.UseRowNumberForPaging()), ServiceLifetime.Singleton);
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSwagger();
+            services.AddAuth0();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<QuizDbContext>();
+                context.Database.Migrate();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -40,7 +53,8 @@ namespace Outloud.QuizService
                 app.UseHsts();
             }
 
-            // app.UseHttpsRedirection();
+            app.UseSwagger();
+            app.UseAuth0();
             app.UseMvc();
         }
     }
